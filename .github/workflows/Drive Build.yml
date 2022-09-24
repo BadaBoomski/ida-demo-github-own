@@ -1,0 +1,24 @@
+name: Drive Build
+on:
+  push:
+    paths:
+    - 'Projects/Drive/**'
+    branches:
+    - main
+  pull_request:
+    paths:
+    - 'Projects/Drive/**'
+    branches:
+    - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: dotnet build
+      run: dotnet build "Projects\Drive\Drive.csproj" --configuration Release

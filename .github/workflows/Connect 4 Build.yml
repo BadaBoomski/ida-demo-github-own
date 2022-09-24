@@ -1,0 +1,24 @@
+name: Connect 4 Build
+on:
+  push:
+    paths:
+    - 'Projects/Connect 4/**'
+    branches:
+    - main
+  pull_request:
+    paths:
+    - 'Projects/Connect 4/**'
+    branches:
+    - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: dotnet build
+      run: dotnet build "Projects\Connect 4\Connect 4.csproj" --configuration Release

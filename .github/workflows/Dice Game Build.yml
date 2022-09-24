@@ -1,0 +1,24 @@
+name: Dice Game Build
+on:
+  push:
+    paths:
+    - 'Projects/Dice Game/**'
+    branches:
+    - main
+  pull_request:
+    paths:
+    - 'Projects/Dice Game/**'
+    branches:
+    - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: dotnet build
+      run: dotnet build "Projects\Dice Game\Dice Game.csproj" --configuration Release

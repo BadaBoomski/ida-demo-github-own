@@ -1,0 +1,24 @@
+name: Bound Build
+on:
+  push:
+    paths:
+    - 'Projects/Bound/**'
+    branches:
+    - main
+  pull_request:
+    paths:
+    - 'Projects/Bound/**'
+    branches:
+    - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: dotnet build
+      run: dotnet build "Projects\Bound\Bound.csproj" --configuration Release

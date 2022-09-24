@@ -1,0 +1,20 @@
+name: Role Playing Game Build
+on:
+  push:
+    paths:
+    - 'Projects/Role Playing Game/**'
+  pull_request:
+    paths:
+    - 'Projects/Role Playing Game/**'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: dotnet build
+      run: dotnet build "Projects\Role Playing Game\Role Playing Game.csproj" --configuration Release
